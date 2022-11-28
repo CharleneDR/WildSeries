@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Raleway&display=swap');
-@import "~bootstrap/scss/bootstrap";
 
 $backgroundColor: #F7F3F6;
 $mainColor: #BBD686;
@@ -20,3 +19,5 @@ $theme-colors: (
     width: 30px;
     height: 30px;
 }
+
+@import "~bootstrap/scss/bootstrap";
