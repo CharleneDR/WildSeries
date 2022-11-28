@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Raleway&display=swap');
+@import "~bootstrap/scss/bootstrap";
+
+$backgroundColor: #F7F3F6;
+$mainColor: #BBD686;
+$secondColor : #7C0B2B;
+$textColor : #000000;
+
+$logoFont : "'Patrick Hand', cursive";
+$mainFont : "'Raleway', sans-serif";
+
+$theme-colors: (
+    "backgroundColor": $backgroundColor,
+    "mainColor": $mainColor,
+    "secondColor" : $secondColor,
+    "textColor" : $textColor
+);
+
+.avatar {
+    width: 30px;
+    height: 30px;
+}
