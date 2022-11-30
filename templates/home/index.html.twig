@@ -4,6 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Bienvenue !</h1>
-	<img src="{{ asset('build/path_to_image.png') }}" alt=""/>
+	<div class="text-center banner d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('/build/images/cinema2.jpg') }}') ;">
+		<div class="d-flex-column">
+			<h1>Suis tes séries préférées !</h1>
+			<p class="font-italic">
+				Crée ton compte
+			</p>
+		</div>
+	</div>
 {% endblock %}

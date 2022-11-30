@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wild Series
+{% block title %}Toutes les séries
 {% endblock %}
 
+
 {% block body %}
-	<h1>{{ website }}
-		index</h1>
+	<h1>Toutes les séries :
+	</h1>
+	{% for program in programs %}
+		<div>
+			{% include "program/_cardProgram.html.twig" %}
+		</div>
+	{% else %}
+		Aucune série trouvée.
+	{% endfor %}
+
+	<a href="{{ path('app_index') }}">
+		Retour à l'accueil
+	</a>
 {% endblock %}
