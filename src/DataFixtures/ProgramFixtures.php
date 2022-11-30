@@ -17,15 +17,15 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCategory($this->getReference('category_Action'));
         $program->setPoster("https://fr.web.img5.acsta.net/c_310_420/pictures/22/08/29/18/20/3648785.jpg");
         $manager->persist($program);
-        $this->addReference($program->getTitle(), $program);
+        $this->addReference("program_1" , $program);
 
         $program = new Program();
         $program->setTitle('Doctor who');
         $program->setSynopsis("Extraterrestre de 900 ans, le Docteur est un aventurier qui voyage à travers le temps et l'espace à l'aide de son vaisseau, le TARDIS (Time And Relative Dimension In Space), qui, pour mieux s'adapter à l'environnement, a l'apparence d'une cabine téléphonique. Le Docteur voyage en compagnie d'une jeune fille. Ensemble, ils font de nombreuses rencontres sur les diverses planètes qu'ils explorent... ");
         $program->setCategory($this->getReference('category_Aventure'));
-        $program->setPoster("https://imgr.cineserie.com/016/1/2144444.jpg?imgeng=/f_jpg/cmpr_0/w_212/h_318/m_cropbox&ver=1");
+        $program->setPoster("https://sm.ign.com/t/ign_fr/tv/d/doctor-who/doctor-who-1_9u6h.300.jpg");
         $manager->persist($program);
-        $this->addReference($program->getTitle(), $program);
+        $this->addReference("program_2", $program);
 
         $program = new Program();
         $program->setTitle('Breaking Bad');
@@ -34,7 +34,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCategory($this->getReference('category_Action'));
         $program->setPoster("https://fr.web.img3.acsta.net/c_310_420/pictures/19/06/18/12/11/3956503.jpg");
         $manager->persist($program);
-        $this->addReference($program->getTitle(), $program);
+        $this->addReference("program_3", $program);
 
         $program = new Program();
         $program->setTitle('Game of Thrones: House of the Dragon');
@@ -42,7 +42,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCategory($this->getReference('category_Fantastique'));
         $program->setPoster("https://fr.web.img5.acsta.net/c_310_420/pictures/22/06/23/09/17/1110439.jpg");
         $manager->persist($program);
-        $this->addReference($program->getTitle(), $program);
+        $this->addReference("program_4", $program);
 
         $program = new Program();
         $program->setTitle('American Horror Story');
@@ -50,7 +50,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setCategory($this->getReference('category_Horreur'));
         $program->setPoster("https://fr.web.img6.acsta.net/c_310_420/pictures/22/10/03/14/11/0328175.jpg");
         $manager->persist($program);
-        $this->addReference($program->getTitle(), $program);
+        $this->addReference("program_5", $program);
 
         $manager->flush();
     }
