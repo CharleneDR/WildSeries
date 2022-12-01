@@ -4,29 +4,38 @@
 {% endblock %}
 
 {% block body %}
-	<div class="media">
-		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
-		<div class="media-body">
-			<h1 class="mt-0">{{ program.title }}</h1>
+	<div class="d-flex align-items-center mx-3">
+		<img class="align-self-start mr-3 rounded col-3 m-5" src="{{program.poster}}" alt="{{ program.title }} poster">
+		<div class="media-body m-5">
+			<h1 class="mt-0 bolder">{{ program.title }}
+				({{program.year}})</h1>
+			<p>
+				{{program.category.name}}
+				|
+				{{program.country}}
+			</p>
+			<p class="bolder mb-1">Synopsis</p>
 			<p>{{ program.synopsis }}</p>
-			<p>Catégorie :
-				{{ program.category.name }}</p>
-		</div>
-	</div>
-	<div class="seasons">
-		Liste des saisons :
-		<ul>
-			{% for season in program.seasons %}
-				<li>
-					<a href="{{ path('program_season_show', {programId: program.id, seasonId: season.id }) }}">
-						Saison
-						{{season.number}}
-					</a>
 
+
+			<p class="mb-1 bolder">Liste des saisons :</p>
+			<ul class="d-flex flex-row justify-content-center">
+				{% for season in program.seasons %}
+					<li class="mx-4 wrap">
+						<a href="{{ path('program_season_show', {programId: program.id, seasonId: season.id }) }}">
+							Saison
+							{{season.number}}
+						</a>
+
+					</li>
 				</li>
-			</li>
-		{% endfor %}
-	</ul>
+			{% endfor %}
+		</ul>
+	</div>
 </div>
-<a href="{{ path('program_index') }}">
-	Retour à la liste des programmes</a>{% endblock %}
+<div class="mb-2 fixed-bottom">
+	<a href="{{ path('program_index') }}">
+		<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
+		Retour
+	</a>
+</div>{% endblock %}

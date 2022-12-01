@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les catégories
+{% endblock %}
+
+
+{% block body %}
+	<div class="container d-flex">
+		<div class="row d-flex justify-content-center">
+			<div class="col-5 p-5 d-flex">
+				<div class="d-flex flex-column">
+					<h2 class="purple">Toutes les catégories
+					</h2>
+					<ul>
+						{% for category in categories %}
+							<li>
+								<a href="{{ path('category_show', {categoryName: category.name }) }}">{{category.name}}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="col-5 p-5">
+				<img id="category" src="{{ asset('build/images/category3.png') }}">
+			</div>
+		</div>
+	</div>
+	<div class="mb-2 fixed-bottom">
+		<a href="{{ path('app_index') }}" class="m-auto">
+			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
+			Retour
+		</a>
+	</div>
+
+{% endblock %}

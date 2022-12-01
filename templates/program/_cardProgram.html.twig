@@ -1,8 +1,16 @@
-<div class="card" style="width: 18rem;">
-	<img class="card-img-top" src="{{ program.poster }}" alt="Card image cap">
-	<div class="card-body">
-		<h5 class="card-title">{{ program.title }}</h5>
-		<p class="card-text">{{ program.category.name }}</p>
-		<a href="{{ path('program_show', {id: program.id }) }}" class="btn btn-primary">Détails</a>
-	</div>
+<a class="cardLink" href="{{ path('program_show', {id: program.id }) }}">
+	<div class="card m-3 " style="width: 220px;">
+		<img class="card-img-top" src="{{ program.poster }}" alt="Card image cap">
+		<div class="px-3 py-2 d-flex flex-column justify-content-between d-flex align-items-stretch">
+			<div class="programTitle">
+				<p class="mb-1">{{ program.title }}</p>
+			</div>
+			<div>
+				<p class="m-0">{{ program.seasons|length }}
+					saisons</p>
+				<p class="m-0">{{ program.year }}</p>
+				<p class="m-0">{{ program.category.name }}</p>
+			</div>
+		</div>
+	</a>
 </div>

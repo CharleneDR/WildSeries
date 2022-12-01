@@ -5,20 +5,31 @@
 
 
 {% block body %}
-	<h1>Toutes les catégories :
-	</h1>
-	<ul>
-		{% for category in categories %}
-			<li>
-				<a class="dropdown-item" href="{{ path('category_show', {categoryName: category.name }) }}">{{category.name}}</a>
-			</li>
+	<div class="container d-flex">
+		<div class="row col-12 d-flex justify-content-center">
+			<div>
+				<div>
+					<h2 class="purple">Toutes les catégories
+					</h2>
+				</div>
+				<ul class="d-flex flex-row justify-content-center my-4">
+					{% for category in categories %}
+						<li class="mx-4 wrap">
+							<a href="{{ path('category_show', {categoryName: category.name }) }}">{{category.name}}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
 
-		{% else %}
-			Aucune série trouvée.
-		{% endfor %}
-	</ul>
-
-	<a href="{{ path('app_index') }}">
-		Retour à l'accueil
+			<div>
+				<img id="category" src="{{ asset('build/images/category3.png') }}">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mb-2 fixed-bottom">
+	<a href="{{ path('app_index') }}" class="m-auto">
+		<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
+		Retour
 	</a>
-{% endblock %}
+</div>{% endblock %}

@@ -7,32 +7,38 @@
 {% endblock %}
 
 {% block body %}
-	<div class="media">
-		<div class="media-body">
-			<h1 class="mt-0">{{ season.program.title }}
-				- Saison
-				{{season.number}}
-				({{season.year}})</h1>
-			<p>{{ season.description }}</p>
+	<div class="col-9 mt-3 m-auto">
+		<div class="media">
+			<div class="media-body">
+				<h2 class="bolder">{{ season.program.title }}
+					- Saison
+					{{season.number}}
+					({{season.year}})</h2>
+				<p class="mt-4 mb-1 bolder">Description</p>
+				<p>{{ season.description }}</p>
+			</div>
+		</div>
+		<div class="episodes">
+			<p class="mb-0 bolder">{{season.episodes|length}}
+				épisodes :</p>
+			<ul>
+				{% for episode in season.episodes %}
+					<li class="my-2">
+						<a href="{{ path('program_episode_show', {programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">
+							Episode
+							{{episode.number}}
+							-
+							{{episode.title|capitalize}}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
 		</div>
 	</div>
-	<div class="episodes">
-		Liste des épisodes :
-		<ul>
-			{% for episode in season.episodes %}
-				<li>
-					Episode
-					{{episode.number}}
-					-
-					{{episode.title}}
-					<p>{{episode.synopsis}}</p>
-				</li>
-			{% endfor %}
-		</ul>
+	<div class="mb-2 fixed-bottom">
+		<a href="{{ path('program_show', {id: program.id}) }}">
+			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
+			Retour
+		</a>
 	</div>
-
-	<a href="{{ path('program_season_show', {programId: season.program.id, seasonId: season.id }) }}">
-		Retour à la page
-		{{season.program.title}}
-	</a>
 {% endblock %}

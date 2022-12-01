@@ -19,7 +19,6 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
             for($j = 1; $j < 6; $j++) {
                 for($k = 1; $k < 11; $k++) {
 
-
             $episode = new Episode();
             //Ce Faker va nous permettre d'alimenter l'instance de episode que l'on souhaite ajouter en base
             $episode->setNumber($k);

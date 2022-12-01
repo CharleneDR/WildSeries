@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ season.program.title }}
+	- Saison
+	{{season.number}}
+{% endblock %}
+
+{% block body %}
+	<div class="col-9 mt-3 m-auto">
+		<div class="d-flex flex-column">
+			<h2 class="bolder">{{ season.program.title }}
+				- Saison
+				{{season.number}}
+				({{season.year}})</h2>
+			<h3 class="bolder mt-4">Épisode
+				{{episode.number}}
+				-
+				{{episode.title|capitalize}}</h3>
+			<p>{{episode.synopsis}}</p>
+		</div>
+		<div>
+			<img id="category" src="{{ asset('build/images/episode.png') }}" height:'200'>
+		</div>
+	</div>
+	<div class="mb-2 fixed-bottom">
+		<a href="{{ path('program_season_show', {programId: program.id, seasonId: season.id }) }}">
+			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
+			Retour
+		</a>
+	</div>
+{% endblock %}
