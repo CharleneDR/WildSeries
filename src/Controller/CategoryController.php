@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
+use App\Entity\Category;
+use App\Form\CategoryType;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
@@ -23,9 +26,31 @@ class CategoryController extends AbstractController
 
      // Correspond à la route /program/new et au name "program_new"
     #[Route('/new', name: 'new')]
-    public function new(): Response
+    public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
-         // ...
+    // Create a new Category Object
+    $category = new Category();
+
+    // Create the associated Form
+    $form = $this->createForm(CategoryType::class, $category);
+
+    // Get data from HTTP request
+    $form->handleRequest($request);
+    // Was the form submitted ?
+    if ($form->isSubmitted()) {
+        $categoryRepository->save($category, true);            
+        return $this->redirectToRoute('category_index');
+    }
+        
+        // Render the form (best practice)
+        return $this->renderForm('category/new.html.twig', [
+            'form' => $form,
+        ]);
+
+        // Alternative
+        // return $this->render('category/new.html.twig', [
+        //   'form' => $form->createView(),
+        // ]);
     }
 
     #[Route('/{categoryName<\w+>}', methods: ['GET'], name: 'show')]

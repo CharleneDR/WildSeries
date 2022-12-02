@@ -5,14 +5,17 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Entity\Category;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SeasonRepository;
 use App\Repository\EpisodeRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use App\Form\ProgramType;
+use Symfony\Component\HttpFoundation\Request;
 
 
 #[Route('/program', name: 'program_')]
@@ -31,11 +34,28 @@ class ProgramController extends AbstractController
     }
 
      // Correspond à la route /program/new et au name "program_new"
-    #[Route('/new', name: 'new')]
-    public function new(): Response
-    {
-         // ...
-    }
+     #[Route('/new', name: 'new')]
+     public function new(Request $request, ProgramRepository $progamRepository): Response
+     {
+     // Create a new Category Object
+     $program = new Program();
+ 
+     // Create the associated Form
+     $form = $this->createForm(ProgramType::class, $program);
+ 
+     // Get data from HTTP request
+     $form->handleRequest($request);
+     // Was the form submitted ?
+     if ($form->isSubmitted()) {
+         $programRepository->save($program, true);            
+         return $this->redirectToRoute('program_index');
+     }
+         
+         // Render the form (best practice)
+         return $this->renderForm('program/new.html.twig', [
+             'form' => $form,
+         ]);
+     }
 
     #[Route('/{id<\d+>}', methods: ['GET'], name: 'show')]
     public function show(Program $program, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
