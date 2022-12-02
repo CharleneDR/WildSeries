@@ -35,7 +35,7 @@ class ProgramController extends AbstractController
 
      // Correspond à la route /program/new et au name "program_new"
      #[Route('/new', name: 'new')]
-     public function new(Request $request, ProgramRepository $progamRepository): Response
+     public function new(Request $request, ProgramRepository $programRepository): Response
      {
      // Create a new Category Object
      $program = new Program();
@@ -46,16 +46,16 @@ class ProgramController extends AbstractController
      // Get data from HTTP request
      $form->handleRequest($request);
      // Was the form submitted ?
-     if ($form->isSubmitted()) {
-         $programRepository->save($program, true);            
-         return $this->redirectToRoute('program_index');
+     if ($form->isSubmitted() && $form->isValid()) {
+        $programRepository->save($program, true);            
+        return $this->redirectToRoute('program_index');
      }
          
          // Render the form (best practice)
-         return $this->renderForm('program/new.html.twig', [
-             'form' => $form,
-         ]);
-     }
+        return $this->renderForm('program/new.html.twig', [
+            'form' => $form,
+        ]);
+    }
 
     #[Route('/{id<\d+>}', methods: ['GET'], name: 'show')]
     public function show(Program $program, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
