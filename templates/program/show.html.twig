@@ -19,7 +19,7 @@
 
 
 			<p class="mb-1 bolder">Liste des saisons :</p>
-			<ul class="d-flex flex-row justify-content-center">
+			<ul class="d-flex flex-row justify-content-center flex-wrap">
 				{% for season in program.seasons %}
 					<li class="mx-4 wrap">
 						<a href="{{ path('program_season_show', {programId: program.id, seasonId: season.id }) }}">
