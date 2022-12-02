@@ -1,21 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les séries
+{% block title %}Les séries
 {% endblock %}
 
-
 {% block body %}
-	<h1>Toutes les séries :
-	</h1>
-	{% for program in programs %}
-		<div>
-			{% include "program/_cardProgram.html.twig" %}
+	<div class="container d-flex m-auto">
+		<div class="row w-100 m-auto d-flex justify-content-center">
+			<div>
+				<div>
+					<h2 class="purple">Toutes les séries
+					</h2>
+				</div>
+			</div>
 		</div>
-	{% else %}
-		Aucune série trouvée.
-	{% endfor %}
+	</div>
 
-	<a href="{{ path('app_index') }}">
-		Retour à l'accueil
-	</a>
+	<div class="container d-flex flex-column m-0 p-0 m-auto">
+		<div class="row justify-content-center m-auto">
+			<div class="d-flex flex-wrap justify-content-start align-self-center mt-3">
+				{% if programs is not empty %}
+					{% for program in programs %}
+						{% include "program/_cardProgram.html.twig" %}
+					{% endfor %}
+				{% else %}
+					<div class="m-auto">Aucune série trouvée</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="mb-2 fixed-bottom">
+		<a href="{{ path('category_index') }}">
+			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
+			Retour
+		</a>
+	</div>
 {% endblock %}
