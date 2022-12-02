@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 
 
@@ -17,12 +19,60 @@ class ProgramType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('synopsis', TextType::class)
-            ->add('poster', TextType::class)
-            ->add('country', CountryType::class)
-            ->add('year', IntegerType::class)
-            ->add('category', null, ['choice_label' => 'name'])        ;
+            ->add('title', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Titre',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
+            ->add('synopsis', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Synopsis',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
+            ->add('poster', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Image',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
+            ->add('country', CountryType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Pays de production',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
+            ->add('year', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Année de production',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
+            ->add('category', null, ['choice_label' => 'name'], CategoryType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Genre',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,11 +1,12 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}New category
+{% block title %}Nouvelle catégorie
 {% endblock %}
 
 {% block body %}
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	<button type="submit">Add category</button>
-	{{ form_end(form) }}
+	<h1>Créer une nouvelle catégorie</h1>
+
+	{{ include('category/_form.html.twig') }}
+
+	<a href="{{ path('app_episode_index') }}">Retour</a>
 {% endblock %}

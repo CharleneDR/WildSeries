@@ -1,11 +1,12 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}New program
+{% block title %}Nouvelle série
 {% endblock %}
 
 {% block body %}
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	<button type="submit">Add program</button>
-	{{ form_end(form) }}
+	<h1>Créer une nouvelle série</h1>
+
+	{{ include('program/_form.html.twig') }}
+
+	<a href="{{ path('app_episode_index') }}">Retour</a>
 {% endblock %}
