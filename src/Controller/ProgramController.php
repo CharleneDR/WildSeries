@@ -47,7 +47,9 @@ class ProgramController extends AbstractController
      $form->handleRequest($request);
      // Was the form submitted ?
      if ($form->isSubmitted() && $form->isValid()) {
-        $programRepository->save($program, true);            
+        $programRepository->save($program, true);   
+        $this->addFlash('mainColor', 'The new program has been created');        
+         
         return $this->redirectToRoute('program_index');
      }
          
@@ -94,5 +96,17 @@ class ProgramController extends AbstractController
             'episode' => $episode,
             'categories' => $categories
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_program_delete', methods: ['POST'])]
+    public function delete(Request $request, Program $program, ProgramRepository $programRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
+            $programRepository->remove($program, true);
+            $this->addFlash('secondColor', 'The program has been deleted');        
+
+        }
+
+        return $this->redirectToRoute('app_program_index', [], Response::HTTP_SEE_OTHER);
     }
 }

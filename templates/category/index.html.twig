@@ -12,7 +12,7 @@
 					<h2 class="purple">Toutes les catégories
 					</h2>
 				</div>
-				<ul class="d-flex flex-row justify-content-center my-4">
+				<ul class="d-flex flex-row justify-content-center my-4 flex-wrap">
 					{% for category in categories %}
 						<li class="mx-4 wrap">
 							<a href="{{ path('category_show', {categoryName: category.name }) }}">{{category.name}}</a>

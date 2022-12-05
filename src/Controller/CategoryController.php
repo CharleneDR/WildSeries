@@ -38,7 +38,8 @@ class CategoryController extends AbstractController
     $form->handleRequest($request);
     // Was the form submitted ?
     if ($form->isSubmitted() && $form->isValid()) {
-        $categoryRepository->save($category, true);            
+        $categoryRepository->save($category, true);    
+        $this->addFlash('mainColor', 'The new category has been created');        
         return $this->redirectToRoute('category_index');
     }
         
@@ -70,5 +71,17 @@ class CategoryController extends AbstractController
             'categories' => $categories,
             'programs' => $programsByCategory
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
+    public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            $categoryRepository->remove($category, true);
+            $this->addFlash('secondColor', 'The category has been deleted');        
+
+        }
+ 
+        return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
     }
 }
