@@ -12,38 +12,43 @@
 						Catégories
 					</a>
 
-					{% if categories is defined %}
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{% if categories is defined %}
 							{% for category in categories %}
 								<li>
 									<a class="dropdown-item" href="{{ path('category_show', {categoryName: category.name }) }}">{{category.name}}</a>
 								</li>
 							{% endfor %}
-							<li>
-								<a class="dropdown-item" href="{{ path('category_index') }}">Toutes les catégories</a>
-							</li>
-						</ul>
+							<li><hr class="dropdown-divider"></li>
+						{% endif %}
+						<li>
+							<a class="dropdown-item" href="{{ path('category_index') }}">Toutes les catégories</a>
+						</li>
 
-					{% endif %}
+					</ul>
 				</li>
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle text-textColor" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Acteurs
 					</a>
+
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{% if actors is defined %}
+							{% for actor in actors|slice(0,9) %}
+								<li>
+									<a class="dropdown-item" href="{{ path('app_actor_show', {id: actor.id }) }}">{{actor.name}}</a>
+								</li>
+								{% else %}
+							{% endfor %}
+							<li><hr class="dropdown-divider"></li>
+						{% endif %}
 						<li>
-							<a class="dropdown-item" href="#">Action</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Another action</a>
-						</li>
-						<li><hr class="dropdown-divider"></li>
-						<li>
-							<a class="dropdown-item" href="#">Something else here</a>
+							<a class="dropdown-item" href="{{ path('app_actor_index') }}">Tous les acteurs</a>
 						</li>
 					</ul>
+
+
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link text-textColor" href="#">Mes favoris</a>
