@@ -24,7 +24,7 @@
 			<ul>
 				{% for episode in season.episodes %}
 					<li class="my-2">
-						<a href="{{ path('program_episode_show', {programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">
+						<a href="{{ path('program_episode_show', {programSlug: program.slug, seasonId: season.id, episodeSlug: episode.slug }) }}">
 							Episode
 							{{episode.number}}
 							-
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="mb-2 fixed-bottom">
-		<a href="{{ path('program_show', {id: program.id}) }}">
+		<a href="{{ path('program_show', {slug: program.slug}) }}">
 			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
 			Retour
 		</a>

@@ -2,20 +2,22 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Entity\Program;
 use App\Entity\Category;
-use App\Repository\ProgramRepository;
-use App\Repository\CategoryRepository;
+use App\Form\ProgramType;
+use App\Service\ProgramDuration;
 use App\Repository\SeasonRepository;
 use App\Repository\EpisodeRepository;
-use App\Form\ProgramType;
+use App\Repository\ProgramRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 #[Route('/program', name: 'program_')]
@@ -35,7 +37,7 @@ class ProgramController extends AbstractController
 
      // Correspond à la route /program/new et au name "program_new"
      #[Route('/new', name: 'new')]
-     public function new(Request $request, ProgramRepository $programRepository): Response
+     public function new(Request $request, ProgramRepository $programRepository, SluggerInterface $slugger): Response
      {
      // Create a new Category Object
      $program = new Program();
@@ -47,6 +49,10 @@ class ProgramController extends AbstractController
      $form->handleRequest($request);
      // Was the form submitted ?
      if ($form->isSubmitted() && $form->isValid()) {
+        
+        $slug = $slugger->slug($program->getTitle());
+        $program->setSlug($slug);
+
         $programRepository->save($program, true);   
         $this->addFlash('mainColor', 'The new program has been created');        
          
@@ -59,19 +65,41 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{id<\d+>}', methods: ['GET'], name: 'show')]
-    public function show(Program $program, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
+    #[Route('/{slug}', methods: ['GET'], name: 'show')]
+    public function show(Program $program, ProgramRepository $programRepository, ProgramDuration $programDuration, CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
 
         return $this->render('program/show.html.twig', [
             'categories' => $categories,
-            'program' => $program
+            'program' => $program,
+            'programDuration' => $programDuration->calculate($program),
         ]);
     }
 
-    #[Route('/{programId<\d+>}/season/{seasonId<\d+>}', methods: ['GET'], name: 'season_show')]
-    #[Entity('program', options: ['mapping' => ['programId' => 'id']])]
+    #[Route('/{slug}/edit', name: 'app_program_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Program $program, ProgramRepository $programRepository, SluggerInterface $slugger): Response
+    {
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugger->slug($program->getTitle());
+            $program->setSlug($slug);
+    
+            $programRepository->save($program, true);
+
+            return $this->redirectToRoute('app_program_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{programSlug}/season/{seasonId<\d+>}', methods: ['GET'], name: 'season_show')]
+    #[Entity('program', options: ['mapping' => ['programSlug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
     public function showSeason(Program $program, Season $season, CategoryRepository $categoryRepository): Response
     {
@@ -83,10 +111,10 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{programId<\d+>}/season/{seasonId<\d+>}/episode/{episodeId<\d+>}', methods: ['GET'], name: 'episode_show')]
-    #[Entity('program', options: ['mapping' => ['programId' => 'id']])]
+    #[Route('/{programSlug}/season/{seasonId<\d+>}/episode/{episodeSlug}', methods: ['GET'], name: 'episode_show')]
+    #[Entity('program', options: ['mapping' => ['programSlug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
-    #[Entity('episode', options: ['mapping' => ['episodeId' => 'id']])]
+    #[Entity('episode', options: ['mapping' => ['episodeSlug' => 'slug']])]
     public function showEpisode(Program $program, Season $season, Episode $episode, CategoryRepository $categoryRepository, EpisodeRepository $episodeRepository)
     {
         $categories = $categoryRepository->findAll();
