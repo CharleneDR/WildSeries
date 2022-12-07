@@ -1,0 +1,21 @@
+{% extends "program/emailLayout.html.twig" %}
+
+{% block title %}
+	Nouveau programme créé :
+	{{ program.title }}
+{% endblock %}
+
+{% block information %}
+	Hello sérivore ! Le nouveau programme
+	{{ program.title }}
+	vient d'être créé sur Wild Séries !
+{% endblock %}
+
+{% block synopsis %}
+	Synopsis :
+	{{ program.synopsis }}
+{% endblock %}
+
+{% block link %}
+	<a href="http://localhost:8000/program/{{program.slug}}">Voir le nouveau programme</a>
+{% endblock %}

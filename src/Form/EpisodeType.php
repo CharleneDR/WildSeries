@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Episode;
+use App\Form\ProgramType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,11 +26,29 @@ class EpisodeType extends AbstractType
                     'class' => 'form-label'
                 ],
             ])
+            ->add('season', null, ['choice_label' => 'number'], SeasonType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Saison associée',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
             ->add('number', IntegerType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
                 'label' => 'Numéro de l\'épisode',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+            ])
+            ->add('duration', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Durée de l\'épisode',
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
@@ -42,16 +61,8 @@ class EpisodeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
-            ])
-            ->add('season', null, ['choice_label' => 'number'], SeasonType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Saison associée',
-                'label_attr' => [
-                    'class' => 'form-label'
-                ],
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

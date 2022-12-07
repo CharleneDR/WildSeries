@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div class="mb-2 fixed-bottom">
-		<a href="{{ path('program_season_show', {programSlug: program.slug, seasonId: season.id }) }}">
+		<a href="{{ path('program_season_show', {programSlug: season.program.slug, seasonId: season.id }) }}">
 			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
 			Retour
 		</a>
