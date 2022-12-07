@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Série #{{ program.id }}
+{% block title %}
+	{{parent()}}
+	-
+	{{ program.title }}
 {% endblock %}
 
 {% block body %}
 	<div class="d-flex align-items-center mx-3">
-		<img class="align-self-start mr-3 rounded col-3 m-5" src="{{program.poster}}" alt="{{ program.title }} poster">
+		<img class="align-self-start mr-3 rounded col-3 m-5" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
 		<div class="media-body m-5">
 			<h1 class="mt-0 bolder">{{ program.title }}
 				({{program.year}})</h1>
@@ -63,6 +66,8 @@
 							{{season.number}}
 						</a>
 					</li>
+				{% else %}
+					Pas encore de saison..
 				{% endfor %}
 			</ul>
 		</div>

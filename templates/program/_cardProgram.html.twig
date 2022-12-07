@@ -1,6 +1,6 @@
 <a class="cardLink" href="{{ path('program_show', {slug: program.slug }) }}">
 	<div class="card m-3 col-3">
-		<img class="card-img-top" src="{{ program.poster }}" alt="Card image cap">
+		<img class="card-img-top" src="{{ vich_uploader_asset(program) }}" alt="{{program.title}}" height="300">
 		<div class="px-3 py-2 d-flex flex-column justify-content-between d-flex align-items-stretch">
 			<div class="programTitle">
 				<p class="mb-1">{{ program.title }}</p>

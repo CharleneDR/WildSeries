@@ -5,13 +5,29 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container d-flex">
-		<div class="row col-12 d-flex justify-content-center">
-			<div>
-				<div>
-					<h2 class="purple">Séries où apparait
-						{{actor.name}}
-					</h2>
+	<div class="d-flex align-items-center mx-3">
+		<img class="align-self-start mr-3 rounded col-3 m-5" src="/uploads/images/actors/{{actor.picture}}" alt="{{ actor.name }} poster">
+		<div class="media-body m-5">
+			<h1 class="mt-0 bolder">{{ actor.name }}</h1>
+
+			<p class="bolder mb-1 mt-4">Pays d'origine :</p>
+			<p>{{ actor.nationality }}</p>
+
+			<p class="mb-1 bolder">Anniversaire :</p>
+			<p>{{ actor.birthday }}</p>
+
+			<p class="mb-1 bolder">Biography :</p>
+			<p>{{ actor.biography }}</p>
+
+			<div class="container d-flex">
+				<div class="row col-12 d-flex justify-content-center">
+					<div>
+						<div>
+							<h2 class="purple">Séries où apparait
+								{{actor.name}}
+							</h2>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

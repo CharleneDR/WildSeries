@@ -2,11 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Program;
 use App\Entity\Actor;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Program;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -39,19 +40,11 @@ class ProgramType extends AbstractType
                     'class' => 'form-label'
                 ],
             ])
-            ->add('poster', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Image',
-                'label_attr' => [
-                    'class' => 'form-label'
-                ],
-            ])
             ->add('country', CountryType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'choice_translation_domain' => 'FR',
                 'label' => 'Pays de production',
                 'label_attr' => [
                     'class' => 'form-label'
@@ -82,7 +75,13 @@ class ProgramType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false
-                ]);
+                ])
+                
+            ->add('posterFile', VichFileType::class, [
+                'required'      => false,
+                'allow_delete'  => true, // not mandatory, default is true
+                'download_uri' => true, // not mandatory, default is true
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
