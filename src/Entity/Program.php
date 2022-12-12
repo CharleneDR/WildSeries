@@ -163,7 +163,7 @@ class Program
 
     public function getCountry(): ?string
     {
-        return Countries::getName($this->country);
+        return Countries::getName($this->country, 'fr');
     }
 
     public function setCountry(string $country): self
