@@ -7,7 +7,9 @@ use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Category;
 use App\Form\ProgramType;
+use App\Form\SearchProgramType;
 use App\Service\ProgramDuration;
+use Symfony\Component\Mime\Email;
 use App\Repository\SeasonRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
@@ -19,7 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mime\Email;
 
 
 #[Route('/program', name: 'program_')]
@@ -27,13 +28,25 @@ class ProgramController extends AbstractController
 {
      // Correspond à la route /program/ et au name "program_index"
      #[Route('/', name: 'index')]
-    public function index(ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
+    public function index(Request $request, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
+        $form = $this->createForm(SearchProgramType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+
+            $programs = $programRepository->findLikeName($search);
+        } else {
         $programs = $programRepository->findAll();
+        }
+        
         $categories = $categoryRepository->findAll();;
-        return $this->render('program/index.html.twig', [
+
+        return $this->renderForm('program/index.html.twig', [
             'programs' => $programs,
-            'categories' => $categories
+            'categories' => $categories,
+            'form' => $form
         ]);
     }
 
