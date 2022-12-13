@@ -2,81 +2,63 @@
 
 namespace App\Form;
 
-use App\Entity\Actor;
-use App\Entity\Program;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-
-class ActorType extends AbstractType
+class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
+            ->add('comment', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Ton commentaire..'
                 ],
-                'label' => 'Nom',
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
             ])
-
-            ->add('birthday', DateType::class, [
+            ->add('rate', IntegerType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'min' => 0,
+                    'max' => 5,
+                    'value' => 5
+
                 ],
-                'label' => 'Anniversaire',
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
             ])
-
-            ->add('nationality', CountryType::class, [
+            ->add('author', null, ['choice_label' => 'id'], UserType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'choice_translation_domain' => 'FR',
-                'label' => 'Origine',
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
             ])
-
-            ->add('biography', TextareaType::class, [
+            ->add('episode', null, ['choice_label' => 'id'], EpisodeType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Biographie',
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
             ])
-
-            ->add('actorFile', VichFileType::class, [
-                'required' => true,
-                'allow_delete' => false,
-            ])
-            
-            ->add('programs', EntityType::class, [
-                'label' => 'Séries',
-                'class' => Program::class,
-                'choice_label' => 'title',
-                'multiple' => true,
-                'expanded' => true,
-                'by_reference' => false
-                ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Actor::class,
+            'data_class' => Comment::class,
         ]);
     }
 }

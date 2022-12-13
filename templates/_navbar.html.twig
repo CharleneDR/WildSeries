@@ -54,11 +54,21 @@
 					<a class="nav-link text-textColor" href="#">Mes favoris</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-textColor" href="#">Déconnexion</a>
+					{% if app.user %}
+
+						<a href="{{ path('app_logout') }}">
+							Se déconnecter</a>
+
+					{% else %}
+						<a href="{{ path('app_login') }}">
+							Se connecter</a>
+					{% endif %}
 				</li>
-				<li class="nav-item">
-					<a class="nav-link text-textColor" href="#">John Doe</a>
-				</li>
+				{% if app.user %}
+					<li class="nav-item">
+						<a class="nav-link text-textColor" href="#">{{ app.user.email }}</a>
+					</li>
+				{% endif %}
 				<li class="nav-item">
 					<a class="nav-link text-textColor" href="#"><img class="rounded-circle border border-dark avatar"></img>
 				</li>

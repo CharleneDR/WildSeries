@@ -21,6 +21,34 @@
 				{{episode.title|capitalize}}</h3>
 			<p>{{episode.synopsis}}</p>
 		</div>
+
+		<div>
+			{% if form is defined %}
+
+				<p class='bolder'>Donne ton avis !</p>
+				<div>
+					{{ form_start(form) }}
+					{{ form_widget(form.rate) }}
+					{{ form_widget(form.comment) }}
+
+					<button class="my-3" type="submit">Envoyer</button>
+					{{ form_end(form) }}
+				</div>
+			{% else %}
+				<p class="bolder">Connecte-toi pour donner ton avis !</p>
+			{% endif %}
+			<p class="underlined">{{episode.comments|length}}
+				commentaires
+			</p>
+			<div>
+				{% for comment in episode.comments %}
+					<p>{{comment.author.username}}</p>
+					<p>{{comment.rate}}/5</p>
+					<p>{{comment.comment}}</p>
+				{% endfor %}
+			</div>
+
+		</div>
 		<div>
 			<img id="category" src="{{ asset('build/images/episode.png') }}" height:'200'>
 		</div>

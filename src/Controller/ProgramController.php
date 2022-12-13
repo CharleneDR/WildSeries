@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Season;
+use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Category;
@@ -11,6 +12,7 @@ use App\Form\SearchProgramType;
 use App\Service\ProgramDuration;
 use Symfony\Component\Mime\Email;
 use App\Repository\SeasonRepository;
+use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
@@ -21,6 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\CommentType;
 
 
 #[Route('/program', name: 'program_')]
@@ -134,18 +137,38 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{programSlug}/season/{seasonId<\d+>}/episode/{episodeSlug}', methods: ['GET'], name: 'episode_show')]
+    #[Route('/{programSlug}/season/{seasonId<\d+>}/episode/{episodeSlug}', name: 'episode_show')]
     #[Entity('program', options: ['mapping' => ['programSlug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
     #[Entity('episode', options: ['mapping' => ['episodeSlug' => 'slug']])]
-    public function showEpisode(Program $program, Season $season, Episode $episode, CategoryRepository $categoryRepository, EpisodeRepository $episodeRepository)
+    public function showEpisode(Request $request, CommentRepository $commentrepository, Program $program, Season $season, Episode $episode, CategoryRepository $categoryRepository, EpisodeRepository $episodeRepository)
     {
         $categories = $categoryRepository->findAll();
-        return $this->render('program/episode_show.html.twig', [
+        
+        if($this->isGranted('IS_AUTHENTICATED_FULLY')){
+            $comment = new Comment();
+            $comment->setAuthor($this->container->get('security.token_storage')->getToken()->getUser());
+            $comment->setEpisode($episode);
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $commentrepository->save($comment, true);
+            }
+
+            return $this->renderForm('program/episode_show.html.twig', [
+                'program' => $program,
+                'season' => $season,
+                'episode' => $episode,
+                'categories' => $categories,
+                'form' => $form
+            ]);
+        }
+
+        return $this->renderForm('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
