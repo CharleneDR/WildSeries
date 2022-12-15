@@ -22,7 +22,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     {
         $program1 = new Program();
         $program1->setTitle('The Walking dead');
-        $program1->setCountry('Etats Unis');
+        $program1->setCountry('US');
         $program1->setYear(2010);
         $program1->setSynopsis("Après une apocalypse ayant transformé la quasi-totalité de la population en zombies, un groupe d'hommes et de femmes mené par l'officier Rick Grimes tente de survivre... Ensemble, ils vont devoir tant bien que mal faire face à ce nouveau monde devenu méconnaissable, à travers leur périple dans le Sud profond des États-Unis.");
         $program1->setCategory($this->getReference('category_Action'));
