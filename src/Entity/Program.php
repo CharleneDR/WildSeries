@@ -72,6 +72,10 @@ class Program
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'programs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $owner = null;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
@@ -163,7 +167,12 @@ class Program
 
     public function getCountry(): ?string
     {
-        return Countries::getName($this->country, 'fr');
+        if($this->country)
+        {
+            return Countries::getName($this->country, 'fr');
+        } else {
+            return $this->country;
+        }
     }
 
     public function setCountry(string $country): self
@@ -247,6 +256,17 @@ class Program
     {
         $this->updatedAt = $updatedAt;
 
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
         return $this;
     }
 

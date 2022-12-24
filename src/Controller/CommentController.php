@@ -22,6 +22,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, CommentRepository $commentRepository): Response
     {
         $comment = new Comment();
@@ -51,7 +52,11 @@ class CommentController extends AbstractController
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
-        $form = $this->createForm(Comment1Type::class, $comment);
+        if ($this->getUser() !== $comment->getAuthor()) {    
+            throw $this->createAccessDeniedException('Vous n\'êtes pas le propriétaire de ce commentaire !');
+        }
+
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -67,8 +72,13 @@ class CommentController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
+        if ($this->getUser() !== $comment->getAuthor()) {    
+            throw $this->createAccessDeniedException('Vous n\'êtes pas le propriétaire de ce commentaire !');
+        }
+        
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $commentRepository->remove($comment, true);
         }

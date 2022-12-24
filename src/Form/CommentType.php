@@ -39,6 +39,7 @@ class CommentType extends AbstractType
             ->add('author', null, ['choice_label' => 'id'], UserType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'type' => 'hidden'
                 ],
                 'label_attr' => [
                     'class' => 'form-label'
@@ -47,6 +48,7 @@ class CommentType extends AbstractType
             ->add('episode', null, ['choice_label' => 'id'], EpisodeType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'type' => 'hidden'
                 ],
                 'label_attr' => [
                     'class' => 'form-label'

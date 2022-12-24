@@ -33,6 +33,7 @@ class UserFixtures extends Fixture
         );
         $user->setPassword($hashedPassword);
         $manager->persist($user);
+        $this->addReference($user->getEmail(), $user);
 
         $admin = new User();
         $admin->setUsername($faker->userName());
@@ -44,6 +45,7 @@ class UserFixtures extends Fixture
         );
         $admin->setPassword($hashedPassword);
         $manager->persist($admin);
+        $this->addReference($admin->getEmail(), $admin);
         
         $manager->flush();
 

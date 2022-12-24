@@ -70,6 +70,7 @@ class ProgramController extends AbstractController
         
         $slug = $slugger->slug($program->getTitle());
         $program->setSlug($slug);
+        $program->setOwner($this->getUser());
 
         $programRepository->save($program, true);
 
@@ -106,6 +107,9 @@ class ProgramController extends AbstractController
     #[Route('/{slug}/edit', name: 'app_program_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Program $program, ProgramRepository $programRepository, SluggerInterface $slugger): Response
     {
+        if ($this->getUser() !== $program->getOwner()) {    
+            throw $this->createAccessDeniedException('Vous n\'êtes pas le propriétaire de ce programme!');
+        }
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 

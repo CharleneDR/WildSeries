@@ -70,6 +70,11 @@
 					Pas encore de saison..
 				{% endfor %}
 			</ul>
+			{% if is_granted("ROLE_ADMIN") or is_granted("ROLE_CONTRIBUTOR") and program.owner.id == app.user.id %}
+				<div class="d-flex justify-content-center mt-3">
+					<a class="bolder underlined" href="{{ path('program_app_program_edit', { 'slug': program.slug} ) }}">Éditer</a>
+				</div>
+			{% endif %}
 		</div>
 	</p>
 </div>

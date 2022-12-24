@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ProgramRepository;
-use App\Repository\CategoryRepository;
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\ProgramRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
@@ -26,6 +27,7 @@ class CategoryController extends AbstractController
 
      // Correspond à la route /program/new et au name "program_new"
     #[Route('/new', name: 'new')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
     // Create a new Category Object
