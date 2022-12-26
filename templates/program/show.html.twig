@@ -12,33 +12,37 @@
 		<div class="media-body m-5">
 			<h1 class="mt-0 bolder">{{ program.title }}
 				({{program.year}})</h1>
-			<p>
-				{{program.category.name}}
-				|
-				{{program.country}}
-				|
-				{% if programDuration.0 != 0 %}
-					{% if programDuration.0 == 1 %}
-						{{programDuration.0}}
-						jour
-					{% else %}
-						{{programDuration.0}}
-						jours
+			<div class="d-flex flex-row justify-content-between">
+				<p>
+					{{program.category.name}}
+					|
+					{{program.country}}
+					|
+					{% if programDuration.0 != 0 %}
+						{% if programDuration.0 == 1 %}
+							{{programDuration.0}}
+							jour
+						{% else %}
+							{{programDuration.0}}
+							jours
+						{% endif %}
 					{% endif %}
-				{% endif %}
-				{% if programDuration.1 != 0 %}
-					{% if programDuration.1 == 1 %}
-						{{programDuration.1}}
-						heure
-					{% else %}
-						{{programDuration.1}}
-						heures
+					{% if programDuration.1 != 0 %}
+						{% if programDuration.1 == 1 %}
+							{{programDuration.1}}
+							heure
+						{% else %}
+							{{programDuration.1}}
+							heures
+						{% endif %}
 					{% endif %}
-				{% endif %}
-				{{programDuration.2}}
-				minutes
-
-			</p>
+					{{programDuration.2}}
+					minutes
+				</p>
+				<a class="watchlist pe-5" href="{{ path('program_watchlist', {id: program.id})}}">
+					<i class=" bigHeart bi {% if app.user and app.user.isInWatchlist(program) == true %} bi-heart-fill {% else %} bi-heart {% endif %}"></i>
+				</a>
+			</div>
 			<p class="bolder mb-1">Synopsis</p>
 			<p>{{ program.synopsis }}</p>
 

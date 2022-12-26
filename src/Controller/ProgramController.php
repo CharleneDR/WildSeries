@@ -208,6 +208,7 @@ class ProgramController extends AbstractController
 
         $userRepository->save($this->getUser(), true); 
 
-        return $this->redirectToRoute('program_show', ['slug' => $program->getSlug()], Response::HTTP_SEE_OTHER);
-    }
+        return $this->json([
+            'isInWatchlist' => $this->getUser()->isInWatchlist($program)
+        ]);    }
 }

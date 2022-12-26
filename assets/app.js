@@ -14,5 +14,6 @@ require('bootstrap');
 import './bootstrap';
 
 import './js/form.js';
+import './js/watchlist.js';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';

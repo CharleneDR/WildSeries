@@ -11,8 +11,8 @@
 				<p class="m-0">{{ program.year }}</p>
 				<div class="d-flex flex-row justify-content-between">
 					<p class="m-0">{{ program.category.name }}</p>
-					<a href="{{ path('program_watchlist', {id: program.id})}}">
-						<i class="bi {% if app.user and app.user.isInWatchlist(program) == true %} bi-heart-fill {% else %} bi-heart {% endif %} }}"></i>
+					<a class="watchlist" href="{{ path('program_watchlist', {id: program.id})}}">
+						<i class="bi {% if app.user and app.user.isInWatchlist(program) == true %} bi-heart-fill {% else %} bi-heart {% endif %}"></i>
 					</a>
 				</div>
 			</div>
