@@ -7,23 +7,26 @@ use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Category;
+use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Form\SearchProgramType;
 use App\Service\ProgramDuration;
 use Symfony\Component\Mime\Email;
+use App\Repository\UserRepository;
 use App\Repository\SeasonRepository;
 use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\CommentType;
 
 
 #[Route('/program', name: 'program_')]
@@ -188,6 +191,23 @@ class ProgramController extends AbstractController
         return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/{id}/watchlist', name: 'watchlist', methods: ['POST', 'GET'])]
+    #[IsGranted('ROLE_USER')]
+    public function addToWatchlist(int $id, Program $program, UserRepository $userRepository)
+    {
+        if (!$program) {
+            throw $this->createNotFoundException('Aucun programme trouvé.');
+        }
 
-    
+        if ($this->getUser()->isInWatchList($program))
+        {
+            $this->getUser()->removeFromWatchlist($program);
+        } else {
+            $this->getUser()->addToWatchlist($program);
+        }
+
+        $userRepository->save($this->getUser(), true); 
+
+        return $this->redirectToRoute('program_show', ['slug' => $program->getSlug()], Response::HTTP_SEE_OTHER);
+    }
 }

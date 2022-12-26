@@ -14,3 +14,5 @@ require('bootstrap');
 import './bootstrap';
 
 import './js/form.js';
+
+import 'bootstrap-icons/font/bootstrap-icons.css';
