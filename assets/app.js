@@ -13,6 +13,4 @@ require('bootstrap');
 
 import './bootstrap';
 
-console.log('Hello Webpack Encore !')
-
 import './js/form.js';

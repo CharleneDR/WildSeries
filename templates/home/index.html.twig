@@ -8,8 +8,46 @@
 		<div class="d-flex-column">
 			<h1>SUIS TES SERIES PRÉFÉRÉES !</h1>
 			<p class="m-0" id="signIn">
-				Crée ton compte
+				<a href="{{ path('app_register') }}">Crée ton compte</a>
 			</p>
 		</div>
 	</div>
-{% endblock %}
+
+	<div>
+		<h2 class="purple">Découvre de nouvelles séries
+		</h2>
+
+		<div class="container d-flex flex-column m-0 p-0 m-auto">
+			<div class="row w-100 justify-content-center m-auto">
+				<div class="d-flex flex-wrap justify-content-center align-self-center mt-3">
+					{% if programs is not empty %}
+						{% for program in programs %}
+							{% include "program/_cardProgram.html.twig" %}
+						{% endfor %}
+					{% else %}
+						<div class="m-auto">Aucune série trouvée</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div>
+
+			<div>
+				<h2 class="purple">Les acteurs du moment
+				</h2>
+
+				<div class="container d-flex flex-column m-0 p-0 m-auto">
+					<div class="row w-100 justify-content-center m-auto">
+						<div class="d-flex flex-wrap justify-content-center align-self-center mt-3">
+							{% if actors is not empty %}
+								{% for actor in actors %}
+									{% include "actor/_cardActor.html.twig" %}
+								{% endfor %}
+							{% else %}
+								<div class="m-auto">Aucun acteur trouvé</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div>
+				{% endblock %}

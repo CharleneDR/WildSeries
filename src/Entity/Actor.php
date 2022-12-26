@@ -31,7 +31,7 @@ class Actor
     #[ORM\ManyToMany(targetEntity: Program::class, inversedBy: 'actors')]
     private Collection $programs;
 
-    #[Vich\UploadableField(mapping: 'actor_file', fileNameProperty: 'actor_file')]
+    #[Vich\UploadableField(mapping: 'actor_file', fileNameProperty: 'picture')]
     #[Assert\File(
         maxSize: '1M',
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
@@ -51,7 +51,7 @@ class Actor
     private ?string $nationality = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\Date]
+    #[Assert\Type("\DateTimeInterface")]
     private ?\DateTimeInterface $birthday = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -155,7 +155,10 @@ class Actor
 
     public function getNationality(): ?string
     {
-        return Countries::getName($this->nationality);
+        if ($this->nationality) {
+            return Countries::getName($this->nationality);
+        }
+            return null;
     }
 
     public function setNationality(string $nationality): self
@@ -167,7 +170,10 @@ class Actor
 
     public function getBirthday(): ?string
     {
+        if ($this->birthday) {
         return $this->birthday->format('d/m/Y');
+        }
+        return null;
     }
 
     public function setBirthday(\DateTimeInterface $birthday): self

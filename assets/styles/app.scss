@@ -58,14 +58,6 @@ body {
     letter-spacing: 3px;
 }
 
-#signIn {
-    font-family: $mainFont;
-    font-style: italic;
-    font-size: 18px;
-    letter-spacing: normal;
-    text-decoration: underline;
-}
-
 h2 {
     margin-top: 2%;
 }
@@ -93,6 +85,15 @@ a {
 a:hover {
     color: $secondColor;
     text-decoration: underline;
+}
+
+#signIn a {
+    font-family: $mainFont;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: normal;
+    text-decoration: underline;
+    color: white;
 }
 
 .programTitle {

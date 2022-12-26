@@ -1,0 +1,15 @@
+<a class="cardLink" href="{{ path('app_actor_show', {id : actor.id }) }}">
+	<div class="card programCard m-2 col-3">
+		<img class="card-img-top" src="{{ vich_uploader_asset(actor) }}" alt="{{actor.name}}" height="300">
+		<div class="px-3 py-2 d-flex flex-column justify-content-between d-flex align-items-stretch">
+			<div class="programTitle">
+				<p class="mb-1">{{ actor.name }}</p>
+			</div>
+			<div>
+				<p class="m-0">{{ actor.birthday }}</p>
+				<p class="m-0">{{ actor.programs|length }}
+					séries</p>
+			</div>
+		</div>
+	</a>
+</div>
