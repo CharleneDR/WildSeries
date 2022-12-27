@@ -1,0 +1,66 @@
+welcome: Bienvenue
+account.sign_in: 'Se connecter'
+account.sign_out: 'Se déconnecter'
+account.register_now: 'Créer son compte'
+hello_username: 'Bonjour %username%'
+language: Langue
+categories: Catégories
+actors: Acteurs
+favourites: 'Mes favoris'
+episode: Épisode
+episode_edit: 'Modifier un épisode'
+episode_create: 'Ajouter un épisode'
+back: Retour
+send: Envoyer
+edit: Modifier
+no_episode: 'Aucun épisode trouvé'
+delete: Supprimer
+password: 'Mot de passe'
+forgotten_password: 'Mot de passe oublié'
+no_account_yet: 'Pas encore de compte ?'
+day: jour
+hour: heure
+actors_none: 'Aucun acteur trouvé'
+season: Saison
+seasons_not_yet: 'Aucune saison trouvée'
+feedback: 'Donne ton avis !'
+registrer_for_feedback: 'Connecte toi pour donner ton avis'
+comment: commentaire
+series_create: 'Ajouter une série'
+series_new: 'Nouvelle série !'
+series_edit: 'Modifier une série'
+series_all: 'Toutes les séries'
+series_none: 'Aucune série trouvée'
+season_create: 'Ajotuer une série'
+season_edit: 'Modifier une série'
+series_from_category: 'Toutes les séries de la catégorie'
+category_create: 'Ajouter une catégorie'
+all_categories: 'Toutes les catégories'
+follow_series: 'Suis tes séries préférées'
+discover_series: 'Découvre de nouvelles séries'
+actors_now: 'Les acteurs du moment'
+comment_create: 'Ajouter un commentaire'
+comment_edit: 'Modifier un commentaire'
+no_comment: 'Aucun commentaire'
+reset_password: 'Réinitialiser son mot de passe'
+reset_password_email: 'Entrez votre email afin que nous puissions vous envoyer un lien pour réinitialiser votre mot de passe.'
+agree_terms: 'Accepter les CGU'
+actor_country: "Pays d'origine"
+actor_birthday: Anniversaire
+actor_bio: Biographie
+actor_series: 'Séries où apparaît'
+actor_create: 'Ajouter un acteur'
+series: séries
+actor_edit: 'Modifier un acteur'
+all_actors: 'Tous les acteurs'
+seasons_none: 'Aucune saison trouvée'
+reset_password_sent: 'Lien de réinitialisation de votre mot de passe envoyé'
+reset_password_sent_message: 'Si un compte correspond à votre email, un email contenant un lien pour réinitialiser votre mot de passe vient juste de vous être envoyé. Ce lien expirera dans'
+reset_password_spam: "Si vous n'avez pas reçu de mail, n'oubliez pas de vérifiez vos spams ou"
+reset_password_try_again: 'essayez de nouveau'
+favourites_program: 'Mes séries préférées'
+Aventure: Aventure
+Action: Action
+Fantastique: Fantastique
+Animation: Animation
+Horreur: Horreur

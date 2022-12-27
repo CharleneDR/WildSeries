@@ -1,0 +1,65 @@
+welcome: Welcome
+account.sign_in: 'Sign in'
+account.sign_out: 'Sign out'
+account.register_now: 'Register now'
+hello_username: 'Hello %username%'
+language: Language
+categories: Categories
+actors: Actors
+favourites: 'My fav'
+episode: Episode
+episode_edit: 'Edit an episode'
+episode_create: 'Add an episode'
+back: Back
+send: Send
+edit: Edit
+no_episode: 'No episode found'
+delete: Delete
+password: Password
+forgotten_password: 'Password forgotten?'
+no_account_yet: 'No account yet?'
+day: day
+hour: hour
+actors_none: 'No actor found'
+season: Season
+seasons_none: 'No season found'
+feedback: 'Give your feedback!'
+registrer_for_feedback: 'Register to give your feedback!'
+comment: comment
+series_create: 'Add a series'
+series_new: 'New series'
+series_edit: 'Edit a series'
+series_all: 'All series'
+series_none: 'No series found'
+season_create: 'Add a season'
+season_edit: 'Edit a season'
+series_from_category: 'All series in category'
+category_create: 'Add a category'
+all_categories: 'All categories'
+follow_series: 'Follow your favourite series !'
+discover_series: 'Discover new series'
+actors_now: 'Actors of the moment'
+comment_create: 'Add a comment'
+comment_edit: 'Edit a comment'
+no_comment: 'No comment found'
+reset_password: 'Reset your password'
+reset_password_email: 'Please give us your email then we can send you a link to reset your password.'
+agree_terms: 'Accept terms'
+actor_country: Country
+actor_birthday: Birthday
+actor_bio: Biography
+actor_series: 'Series with'
+actor_create: 'Add an actor'
+series: series
+actor_edit: 'Edit an actor'
+all_actors: 'All actors'
+reset_password_sent: 'Reset password link sent'
+reset_password_sent_message: 'If an account was found corresponding to this email, a link to reset your password has just been sent. This link expires in'
+reset_password_spam: 'If you have not received an email from us, please check your spam folder or'
+reset_password_try_again: 'try again'
+favourites_program: 'My favourite programs'
+Aventure: Adventure
+Action: Action
+Fantastique: Fantasy
+Animation: Animation
+Horreur: Horror

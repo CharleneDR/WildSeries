@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Episode
+{% block title %}
+	{{ 'episode'|trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Episode</h1>
+	<h1>{{ 'episode'|trans }}</h1>
 
 	<table class="table">
 		<tbody>
@@ -27,9 +28,7 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_episode_index') }}">back to list</a>
-
-	<a href="{{ path('app_episode_edit', {'slug': episode.slug}) }}">edit</a>
+	<a href="{{ path('app_episode_edit', {'slug': episode.slug}) }}">{{ 'episode_edit'|trans }}</a>
 
 	{{ include('episode/_delete_form.html.twig') }}
 {% endblock %}

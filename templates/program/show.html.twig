@@ -14,26 +14,26 @@
 				({{program.year}})</h1>
 			<div class="d-flex flex-row justify-content-between">
 				<p>
-					{{program.category.name}}
+					{{program.category.name|trans}}
 					|
 					{{program.country}}
 					|
 					{% if programDuration.0 != 0 %}
 						{% if programDuration.0 == 1 %}
 							{{programDuration.0}}
-							jour
+							{{ 'day'|trans }}
 						{% else %}
 							{{programDuration.0}}
-							jours
+							{{ 'day'|trans }}s
 						{% endif %}
 					{% endif %}
 					{% if programDuration.1 != 0 %}
 						{% if programDuration.1 == 1 %}
 							{{programDuration.1}}
-							heure
+							{{ 'hour'|trans }}
 						{% else %}
 							{{programDuration.1}}
-							heures
+							{{ 'hour'|trans }}s
 						{% endif %}
 					{% endif %}
 					{{programDuration.2}}
@@ -46,7 +46,8 @@
 			<p class="bolder mb-1">Synopsis</p>
 			<p>{{ program.synopsis }}</p>
 
-			<p class="mb-1 bolder">Acteurs :</p>
+			<p class="mb-1 bolder">{{ 'actors'|trans }}
+				:</p>
 			<ul class="d-flex flex-row justify-content-center flex-wrap">
 				{% for actor in program.actors %}
 					<li class="mx-4 wrap">
@@ -56,22 +57,22 @@
 					</li>
 				{% else %}
 					<li>
-						Aucun acteur pour cette série
+						{{ 'actors_none'|trans }}
 					</li>
 				{% endfor %}
 			</ul>
 
-			<p class="mb-1 bolder">Liste des saisons :</p>
+			<p class="mb-1 bolder">{{ 'season'|trans }}s :</p>
 			<ul class="d-flex flex-row justify-content-center flex-wrap">
 				{% for season in program.seasons %}
 					<li class="mx-4 wrap">
 						<a href="{{ path('program_season_show', {programSlug: program.slug, seasonId: season.id }) }}">
-							Saison
+							{{ 'season'|trans }}
 							{{season.number}}
 						</a>
 					</li>
 				{% else %}
-					Pas encore de saison..
+					{{ 'seasons_none'|trans }}
 				{% endfor %}
 			</ul>
 			{% if is_granted("ROLE_ADMIN") or is_granted("ROLE_CONTRIBUTOR") and program.owner.id == app.user.id %}
@@ -85,6 +86,6 @@
 <div class="mb-2 fixed-bottom">
 	<a href="{{ path('program_index') }}">
 		<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
-		Retour
+		{{ 'back'|trans }}
 	</a>
 </div>{% endblock %}

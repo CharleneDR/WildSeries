@@ -34,7 +34,7 @@ class ProgramController extends AbstractController
 {
      // Correspond à la route /program/ et au name "program_index"
      #[Route('/', name: 'index')]
-    public function index(Request $request, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
+    public function index(Request $request, ProgramRepository $programRepository): Response
     {
         $form = $this->createForm(SearchProgramType::class);
         $form->handleRequest($request);
@@ -46,12 +46,9 @@ class ProgramController extends AbstractController
         } else {
         $programs = $programRepository->findAll();
         }
-        
-        $categories = $categoryRepository->findAll();;
 
         return $this->renderForm('program/index.html.twig', [
             'programs' => $programs,
-            'categories' => $categories,
             'form' => $form
         ]);
     }
@@ -96,12 +93,10 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/{slug}', methods: ['GET'], name: 'show')]
-    public function show(Program $program, ProgramRepository $programRepository, ProgramDuration $programDuration, CategoryRepository $categoryRepository): Response
+    public function show(Program $program, ProgramRepository $programRepository, ProgramDuration $programDuration): Response
     {
-        $categories = $categoryRepository->findAll();
 
         return $this->render('program/show.html.twig', [
-            'categories' => $categories,
             'program' => $program,
             'programDuration' => $programDuration->calculate($program),
         ]);
@@ -134,12 +129,10 @@ class ProgramController extends AbstractController
     #[Route('/{programSlug}/season/{seasonId<\d+>}', methods: ['GET'], name: 'season_show')]
     #[Entity('program', options: ['mapping' => ['programSlug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
-    public function showSeason(Program $program, Season $season, CategoryRepository $categoryRepository): Response
+    public function showSeason(Program $program, Season $season): Response
     {
-        $categories = $categoryRepository->findAll();
         return $this->render('program/season_show.html.twig', [
             'season' => $season,
-            'categories' => $categories,
             'program' => $program
         ]);
     }
@@ -148,9 +141,8 @@ class ProgramController extends AbstractController
     #[Entity('program', options: ['mapping' => ['programSlug' => 'slug']])]
     #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
     #[Entity('episode', options: ['mapping' => ['episodeSlug' => 'slug']])]
-    public function showEpisode(Request $request, CommentRepository $commentrepository, Program $program, Season $season, Episode $episode, CategoryRepository $categoryRepository, EpisodeRepository $episodeRepository)
+    public function showEpisode(Request $request, CommentRepository $commentrepository, Program $program, Season $season, Episode $episode, EpisodeRepository $episodeRepository)
     {
-        $categories = $categoryRepository->findAll();
         
         if($this->isGranted('IS_AUTHENTICATED_FULLY')){
             $comment = new Comment();
@@ -166,7 +158,6 @@ class ProgramController extends AbstractController
                 'program' => $program,
                 'season' => $season,
                 'episode' => $episode,
-                'categories' => $categories,
                 'form' => $form
             ]);
         }
@@ -175,7 +166,6 @@ class ProgramController extends AbstractController
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
-            'categories' => $categories,
         ]);
     }
 
@@ -184,8 +174,7 @@ class ProgramController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
             $programRepository->remove($program, true);
-            $this->addFlash('secondColor', 'The program has been deleted');        
-
+            $this->addFlash('secondColor', 'The program has been deleted');
         }
 
         return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);

@@ -19,7 +19,7 @@
 	</head>
 	<body class="bg-backgroundColor">
 		<header>
-			{% include "_navbar.html.twig" %}
+			{{ render(controller('App\\Controller\\DefaultController::navbar')) }}
 
 		</header>
 		{% block body %}{% endblock %}

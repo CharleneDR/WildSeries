@@ -173,7 +173,7 @@ class Program
     {
         if($this->country)
         {
-            return Countries::getName($this->country, 'fr');
+            return Countries::getName($this->country);
         } else {
             return $this->country;
         }

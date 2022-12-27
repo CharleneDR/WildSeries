@@ -89,8 +89,7 @@ class EpisodeController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$episode->getId(), $request->request->get('_token'))) {
             $episodeRepository->remove($episode, true);
-            $this->addFlash('secondColor', 'The episode has been deleted');        
-
+            $this->addFlash('secondColor', 'The episode has been deleted');
         }
 
         return $this->redirectToRoute('app_episode_index', [], Response::HTTP_SEE_OTHER);

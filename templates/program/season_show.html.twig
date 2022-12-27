@@ -4,7 +4,8 @@
 	{{parent()}}
 	-
 	{{ season.program.title }}
-	- Saison
+	-
+	{{ 'season'|trans }}
 	{{season.number}}
 {% endblock %}
 
@@ -13,7 +14,8 @@
 		<div class="media">
 			<div class="media-body">
 				<h2 class="bolder">{{ season.program.title }}
-					- Saison
+					-
+					{{ 'season'|trans }}
 					{{season.number}}
 					({{season.year}})</h2>
 				<p class="mt-4 mb-1 bolder">Description</p>
@@ -22,12 +24,12 @@
 		</div>
 		<div class="episodes">
 			<p class="mb-0 bolder">{{season.episodes|length}}
-				épisodes :</p>
+				{{ 'episode'|trans }}s :</p>
 			<ul>
 				{% for episode in season.episodes %}
 					<li class="my-2">
 						<a href="{{ path('program_episode_show', {programSlug: program.slug, seasonId: season.id, episodeSlug: episode.slug }) }}">
-							Episode
+							{{ 'episode'|trans }}
 							{{episode.number}}
 							-
 							{{episode.title|capitalize}}
@@ -40,7 +42,7 @@
 	<div class="mb-2 fixed-bottom">
 		<a href="{{ path('program_show', {slug: program.slug}) }}">
 			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
-			Retour
+			{{ 'back'|trans }}
 		</a>
 	</div>
 {% endblock %}

@@ -10,43 +10,42 @@
 		<div class="media-body m-5">
 			<h1 class="mt-0 bolder">{{ actor.name }}</h1>
 
-			<p class="bolder mb-1 mt-4">Pays d'origine :</p>
+			<p class="bolder mb-1 mt-4">{{ 'actor_country'|trans }}
+				:</p>
 			<p>{{ actor.nationality }}</p>
 
-			<p class="mb-1 bolder">Anniversaire :</p>
+			<p class="mb-1 bolder">{{ 'actor_birthday'|trans }}
+				:</p>
 			<p>{{ actor.birthday }}</p>
 
-			<p class="mb-1 bolder">Biography :</p>
+			<p class="mb-1 bolder">{{ 'actor_bio'|trans }}
+				:</p>
 			<p>{{ actor.biography }}</p>
+		</div>
+	</div>
 
-			<div class="container d-flex">
-				<div class="row col-12 d-flex justify-content-center">
-					<div>
-						<div>
-							<h2 class="purple">Séries où apparait
-								{{actor.name}}
-							</h2>
-						</div>
-					</div>
+	<div class="container d-flex m-auto">
+		<div class="row w-100 m-auto d-flex justify-content-center">
+			<div>
+				<div>
+					<h2 class="purple">{{ 'actor_series'|trans }}
+						{{actor.name}}
+					</h2>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="container col-12 d-flex flex-column m-0 p-0 w-100 m-auto">
-		<div class="row col-12 justify-content-center">
-			<div class="d-flex flex-column">
-
-				<div class="d-flex col-12 justify-content-left align-self-center mt-3">
-					{% if actor.programs is not empty %}
-						{% for program in actor.programs %}
-							{% include "program/_cardProgram.html.twig" %}
-						{% endfor %}
-					{% else %}
-						<div class="m-auto">Aucune série trouvée pour
-							{{actor.name}}</div>
-					{% endif %}
-				</div>
+	<div class="container d-flex flex-column m-0 p-0 m-auto">
+		<div class="row w-100 justify-content-center m-auto">
+			<div class="d-flex flex-wrap justify-content-center align-self-center mt-3">
+				{% if actor.programs is not empty %}
+					{% for program in actor.programs %}
+						{% include "program/_cardProgram.html.twig" %}
+					{% endfor %}
+				{% else %}
+					<div class="m-auto">{{ 'series_none'|trans }}</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -54,7 +53,7 @@
 	<div class="mb-2 fixed-bottom">
 		<a href="{{ path('category_index') }}">
 			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
-			Retour
+			{{ 'back'|trans }}
 		</a>
 	</div>
 {% endblock %}

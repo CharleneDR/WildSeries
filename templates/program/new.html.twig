@@ -2,13 +2,14 @@
 
 {% block title %}
 	{{parent()}}
-	- Nouvelle série
+	-
+	{{ 'series_create'|trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Créer une nouvelle série</h1>
+	<h1>{{ 'series_create'|trans }}</h1>
 
 	{{ include('program/_form.html.twig') }}
 
-	<a href="{{ path('app_episode_index') }}">Retour</a>
+	<a href="{{ path('app_episode_index') }}">{{ 'back'|trans }}</a>
 {% endblock %}

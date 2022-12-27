@@ -59,7 +59,6 @@ class CategoryController extends AbstractController
     #[Route('/{categoryName<\w+>}', methods: ['GET'], name: 'show')]
     public function show(string $categoryName, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
     {
-        $categories = $categoryRepository->findAll();
         $categorieExists = $categoryRepository->findOneBy(['name' => $categoryName]);
 
         if (!empty($categorieExists)) {
@@ -70,7 +69,6 @@ class CategoryController extends AbstractController
 
         return $this->render('category/show.html.twig', [
             'categoryName' => $categoryName,
-            'categories' => $categories,
             'programs' => $programsByCategory
         ]);
     }
@@ -80,8 +78,7 @@ class CategoryController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);
-            $this->addFlash('secondColor', 'The category has been deleted');        
-
+            $this->addFlash('secondColor', 'The category has been deleted');
         }
  
         return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);

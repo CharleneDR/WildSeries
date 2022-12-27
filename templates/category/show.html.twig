@@ -2,7 +2,8 @@
 
 {% block title %}
 	{{parent()}}
-	- Catégorie
+	-
+	{{ 'categories'|trans }}
 	{{ categoryName }}
 {% endblock %}
 
@@ -11,7 +12,7 @@
 		<div class="row col-12 d-flex justify-content-center">
 			<div>
 				<div>
-					<h2 class="purple">Séries de la catégorie
+					<h2 class="purple">{{ 'series_from_category'|trans }}
 						{{categoryName}}
 					</h2>
 				</div>
@@ -29,7 +30,7 @@
 							{% include "program/_cardProgram.html.twig" %}
 						{% endfor %}
 					{% else %}
-						<div class="m-auto">Aucune série trouvée</div>
+						<div class="m-auto">{{ 'series_none'|trans }}</div>
 					{% endif %}
 				</div>
 			</div>
@@ -39,7 +40,7 @@
 	<div class="mb-2 fixed-bottom">
 		<a href="{{ path('category_index') }}">
 			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
-			Retour
+			{{ 'back'|trans }}
 		</a>
 	</div>
 {% endblock %}

@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle catégorie
+{% block title %}
+	{{parent()}}
+	-
+	{{ 'category_create'|trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Créer une nouvelle catégorie</h1>
+	<h1>{{ 'category_create'|trans }}</h1>
 
 	{{ include('category/_form.html.twig') }}
 
-	<a href="{{ path('app_episode_index') }}">Retour</a>
+	<a href="{{ path('app_episode_index') }}">{{ 'back'|trans }}</a>
 {% endblock %}

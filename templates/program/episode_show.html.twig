@@ -4,7 +4,8 @@
 	{{parent()}}
 	-
 	{{ season.program.title }}
-	- Saison
+	-
+	{{ 'season'|trans }}
 	{{season.number}}
 {% endblock %}
 
@@ -12,10 +13,11 @@
 	<div class="col-9 mt-3 m-auto">
 		<div class="d-flex flex-column">
 			<h2 class="bolder">{{ season.program.title }}
-				- Saison
+				-
+				{{ 'season'|trans }}
 				{{season.number}}
 				({{season.year}})</h2>
-			<h3 class="bolder mt-4">Épisode
+			<h3 class="bolder mt-4">{{ 'episode'|trans }}
 				{{episode.number}}
 				-
 				{{episode.title|capitalize}}</h3>
@@ -25,20 +27,25 @@
 		<div>
 			{% if form is defined %}
 
-				<p class='bolder'>Donne ton avis !</p>
+				<p class='bolder'>{{ 'feedback'|trans }}</p>
 				<div>
 					{{ form_start(form) }}
 					{{ form_widget(form.rate) }}
 					{{ form_widget(form.comment) }}
 
-					<button class="my-3" type="submit">Envoyer</button>
+					<button class="my-3" type="submit">{{ 'send'|trans }}</button>
 					{{ form_end(form) }}
 				</div>
 			{% else %}
-				<p class="bolder">Connecte-toi pour donner ton avis !</p>
+				<p class="bolder">{{ 'registrer_for_feedback'|trans }}</p>
 			{% endif %}
 			<p class="underlined">{{episode.comments|length}}
-				commentaires
+				{% if(episode.comments|length == 0) %}
+					{{ 'comment'|trans }}
+				{% else %}
+					{{ 'comment'|trans }}s
+				{% endif %}
+
 			</p>
 			<div>
 				{% for comment in episode.comments %}
@@ -65,7 +72,7 @@
 	<div class="mb-2 fixed-bottom">
 		<a href="{{ path('program_season_show', {programSlug: season.program.slug, seasonId: season.id }) }}">
 			<img src="{{ asset('build/images/previous.png') }}" id="returnLogo">
-			Retour
+			{{ 'back'|trans }}
 		</a>
 	</div>
 {% endblock %}

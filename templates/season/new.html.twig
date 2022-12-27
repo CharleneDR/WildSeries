@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle saison
+{% block title %}
+	{{ 'season_create'|trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Créer une nouvelle saison</h1>
+	<h1>{{ 'season_create'|trans }}</h1>
 
 	{{ include('season/_form.html.twig') }}
 
-	<a href="{{ path('app_episode_index') }}">Retour</a>
+	<a href="{{ path('app_episode_index') }}">{{ 'back'|trans }}</a>
 {% endblock %}

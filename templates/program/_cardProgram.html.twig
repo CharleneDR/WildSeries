@@ -7,10 +7,10 @@
 			</div>
 			<div>
 				<p class="m-0">{{ program.seasons|length }}
-					saisons</p>
+					{{ 'season'|trans }}s</p>
 				<p class="m-0">{{ program.year }}</p>
 				<div class="d-flex flex-row justify-content-between">
-					<p class="m-0">{{ program.category.name }}</p>
+					<p class="m-0">{{program.category.name|trans}}</p>
 					<a class="watchlist" href="{{ path('program_watchlist', {id: program.id})}}">
 						<i class="bi {% if app.user and app.user.isInWatchlist(program) == true %} bi-heart-fill {% else %} bi-heart {% endif %}"></i>
 					</a>

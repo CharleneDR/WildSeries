@@ -1,10 +1,14 @@
 {# templates/login/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{# ... #}
+{% block title %}
+	{{parent()}}
+	-
+	{{ 'account.sign_in'|trans }}
+{% endblock %}
 
 {% block body %}
-	<h1>Se connecter</h1>
+	<h1>{{ 'account.sign_in'|trans }}</h1>
 	{% if error %}
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 	{% endif %}
@@ -13,18 +17,18 @@
 		<label for="username">Email:</label>
 		<input type="text" id="username" name="_username" value="{{ last_username }}">
 
-		<label for="password">Password:</label>
+		<label for="password">{{ 'password'|trans }}:</label>
 		<input type="password" id="password" name="_password">
 
 		<input type="hidden" name="/" value="/home">
 		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-		<button type="submit">Envoyer</button>
+		<button type="submit">{{ 'send'|trans }}</button>
 	</form>
 	<p class="bolder underlined">
-		<a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+		<a href="{{ path('app_forgot_password_request') }}">{{ 'forgotten_password'|trans }}</a>
 	</p>
 
 	<p class="bolder underlined">
-		<a href="{{ path('app_register') }}">Pas encore de compte ?</a>
+		<a href="{{ path('app_register') }}">{{ 'no_account_yet'|trans }}</a>
 	</p>
 {% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvel acteur
+{% block title %}
+	{{ 'actor_create'|trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Créer un nouvel acteur</h1>
+	<h1>{{ 'actor_create'|trans }}</h1>
 
 	{{ include('actor/_form.html.twig') }}
 {% endblock %}

@@ -6,16 +6,24 @@
 {% block body %}
 	<div class="text-center banner d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('/build/images/cinema2.jpg') }}') ;">
 		<div class="d-flex-column">
-			<h1>SUIS TES SERIES PRÉFÉRÉES !</h1>
+			<h1>{{ 'follow_series'|trans }}</h1>
 			<p class="m-0" id="signIn">
-				<a href="{{ path('app_register') }}">Crée ton compte</a>
+				<a href="{{ path('app_register') }}">{{ 'account.register_now'|trans }}</a>
 			</p>
 		</div>
 	</div>
 
 	<div>
-		<h2 class="purple">Découvre de nouvelles séries
-		</h2>
+		<div class="container d-flex m-auto">
+			<div class="row w-100 m-auto d-flex justify-content-center">
+				<div>
+					<div>
+						<h2 class="purple">{{ 'discover_series'|trans }}
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="container d-flex flex-column m-0 p-0 m-auto">
 			<div class="row w-100 justify-content-center m-auto">
@@ -25,29 +33,37 @@
 							{% include "program/_cardProgram.html.twig" %}
 						{% endfor %}
 					{% else %}
-						<div class="m-auto">Aucune série trouvée</div>
+						<div class="m-auto">{{ 'series_none'|trans }}</div>
 					{% endif %}
 				</div>
 			</div>
 		</div>
 		<div>
 
-			<div>
-				<h2 class="purple">Les acteurs du moment
-				</h2>
-
-				<div class="container d-flex flex-column m-0 p-0 m-auto">
-					<div class="row w-100 justify-content-center m-auto">
-						<div class="d-flex flex-wrap justify-content-center align-self-center mt-3">
-							{% if actors is not empty %}
-								{% for actor in actors %}
-									{% include "actor/_cardActor.html.twig" %}
-								{% endfor %}
-							{% else %}
-								<div class="m-auto">Aucun acteur trouvé</div>
-							{% endif %}
+			<div class="container d-flex m-auto">
+				<div class="row w-100 m-auto d-flex justify-content-center">
+					<div>
+						<div>
+							<h2 class="purple">{{ 'actors_now'|trans }}
+							</h2>
 						</div>
 					</div>
 				</div>
-				<div>
-				{% endblock %}
+			</div>
+
+
+			<div class="container d-flex flex-column m-0 p-0 m-auto">
+				<div class="row w-100 justify-content-center m-auto">
+					<div class="d-flex flex-wrap justify-content-center align-self-center mt-3">
+						{% if actors is not empty %}
+							{% for actor in actors %}
+								{% include "actor/_cardActor.html.twig" %}
+							{% endfor %}
+						{% else %}
+							<div class="m-auto">Aucun acteur trouvé</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
