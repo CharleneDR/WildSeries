@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
-
 $backgroundColor: #F7F3F6;
 $mainColor: #BBD686;
 $secondColor : #7C0B2B;
@@ -62,7 +60,7 @@ h2 {
     margin-top: 2%;
 }
 
-#category {
+#categoryPicture {
     width: 100%;
     border: 1px solid black;
 }
@@ -138,4 +136,73 @@ a:hover {
 .nav-item {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.landscape {
+    width: 450px;
+}
+
+.newProgramImage {
+    width: 100px;
+}
+
+.pimpedForm {
+    h1 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 1rem;
+    }
+
+    form {
+        max-width: 700px;
+        margin: auto;
+        margin-top: 1.5rem;
+        text-align: center;
+
+        div {
+            border: none;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                margin-top: 1rem;
+
+                label {
+                    font-weight: 700;
+                    text-align: left;
+                    margin-bottom: 0.5rem;
+                }
+
+                #program_actors {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: start;
+                    flex-wrap: wrap;
+
+
+                    label {
+                        font-weight: normal;
+                        padding-right: 2rem;
+                    }
+
+                    input {
+                        margin-right: 0.25rem;
+                        margin-bottom: 0.5rem;
+                    }
+                }
+
+                .vich-file {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        button {
+            border: 1px solid black;
+            margin-top: 1.5rem;
+            color: white;
+            background-color: #7C0B2B;
+        }
+    }
 }
